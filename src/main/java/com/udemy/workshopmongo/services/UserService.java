@@ -1,11 +1,9 @@
 package com.udemy.workshopmongo.services;
 
-import java.beans.Transient;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +40,21 @@ public class UserService {
 			throw new ObjectNotFoundException("Objeto não encontrado");
 		}
 		repository.deleteById(id);
+	}
+	
+	@Transactional
+	public User update(User obj, String id) {
+		User newUser = repository.findById(obj.getId())
+				.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado para atualização!"));
+
+		updateData(newUser, obj);
+
+		return repository.save(newUser);
+	}
+
+	public void updateData(User newUser, User obj) {
+		newUser.setName(obj.getName());
+		newUser.setEmail(obj.getEmail());
 	}
 
 	public User fromDto(UserDto objDto) {
