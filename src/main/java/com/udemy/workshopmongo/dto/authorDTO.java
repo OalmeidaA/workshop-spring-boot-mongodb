@@ -6,12 +6,12 @@ import com.udemy.workshopmongo.domain.User;
 
 public class authorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String id;
 	private String name;
-	
+
 	public authorDTO() {
-		
+
 	}
 
 	public authorDTO(User obj) {
@@ -34,7 +34,5 @@ public class authorDTO implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	
 
 }
